@@ -5,5 +5,5 @@ print('you entered',b)
 n=input('Please input the year rate, %:\n')
 print('you entered',n)
 total_amount=int(b)*((1+(int(n)/100)/12)**int(t))
-print('Total amount will be',round(total_amount, 2),'rubels')
+print('Total amount will be',round(total_amount, 2),'rubles')
 
