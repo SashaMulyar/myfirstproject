@@ -1,0 +1,8 @@
+q=input('введите ваше уравнение y=kx+b')
+x=input('введите x:')
+right=q.split('=')
+print(right)
+coef=right[1].split('x')
+print(coef[0], coef[1])
+res=int(coef[0])*int(x) + int(coef[1])
+print(res)
