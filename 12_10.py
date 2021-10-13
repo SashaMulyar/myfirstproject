@@ -23,9 +23,9 @@ print(s)        #сумма нечетных
 len(c)
 for i in range(len(c)-1):
     if i%2==0:
-        print(c[i]*c[i+1])
+        print(c[i]*c[i+1]) #произведения
     else:
-        print(c[i]+c[i+1])
+        print(c[i]+c[i+1]) #суммы
 
     
 
