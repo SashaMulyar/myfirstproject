@@ -164,4 +164,4 @@ def sum(expr):
 def term(expr):
     return sum(expr)
 
-print(term("5+(8/2)*2"))
+print(term("5+8/2*2"))
