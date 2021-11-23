@@ -1,3 +1,4 @@
+import re
 def Jsq(Num):
     global Sum
     d=[]
@@ -10,6 +11,7 @@ def Jsq(Num):
         if i == "+" or i == "-" or i == "*" or i == "/": # символ оценки
             Num = Num.replace(i, ",")
     Num = Num.split(",")
+    Num=(list(filter(lambda x: x != '', Num)))
     k=[]
     for i in Num:
         i=int(i)
@@ -93,9 +95,9 @@ def chazhao():
     j=str(Sum)
     Nba=Nba.replace(Nba[m:m+c+1],j)
 
-    Nba = input ("Пожалуйста, введите формулу расчета:")
+Nba = input ("Пожалуйста, введите формулу расчета:")
 
-1+((3-2)*2+1)
+
 while True:
     if "(" in Nba:
         chazhao()

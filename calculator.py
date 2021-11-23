@@ -79,89 +79,107 @@ import re
 
 
 def num(expr):
-    expr = expr.lstrip()
-    res = re.match("^[+-]?\d(\.\d+)?", expr)
+    expr=expr.lstrip()
+    res=re.match('^[+-]?\d(\.\d+)?',expr)
     if res:
-        return float(res.group(0)), expr[res.end():]
+        return float(res.group(0)),expr[res.end():]
     else:
-        return None, expr
+        return None,expr
 
 def value(expr):
-    res, rest = num(expr)
-    if res != None:
+    res, rest=num(expr)
+    if res!=None:
         return res, rest
-    res, rest = grouping(expr)
+    res, rest=grouping(expr)
     return res, rest
 
 def grouping(expr):
-    expr = expr.lstrip()
-    rest = ""
-    if expr[0] == "(":
-        rest = expr[1:]
+    expr=expr.lstrip()
+    rest=''
+    if expr[0]=='(':
+        rest=expr[1:]
     else:
         return None, expr
-    numb, rest = term(rest)
-    if rest[0] != ")":
+    numb, rest=term(rest)
+    if rest[0]!=')':
         return None, expr
     return numb, rest[1:]
 
 def mul_oper(expr):
-    expr = expr.lstrip()
-    res = re.match("[*/]", expr)
+    expr=expr.lstrip()
+    res=re.match('[*/]',expr)
     if res:
         return res.group(0), expr[res.end():]
     else:
         return None, expr
 
 def mul(expr):
-    numb1, rest1 = value(expr)
+    numb1, rest1=value(expr)
 
-    if numb1 == None:
+    if numb1==None:
         return None, expr
 
-    op, rest2 = mul_oper(rest1)
+    operator, rest2=mul_oper(rest1)
 
-    if op == None:
+    if operator==None:
         return numb1, rest1
 
-    numb2, rest2 = mul(rest2)
+    numb2, rest2=mul(rest2)
 
-    if op == "*":
-        return numb1 * numb2, rest2
-    if op == "/":
-        return numb1 / numb2, rest2
+    if operator=='*':
+        return numb1*numb2, rest2
+    if operator=='/':
+        return numb1/numb2, rest2
 
     return None, expr
 
 def sum_oper(expr):
-    expr = expr.lstrip()
-    res = re.match("[+-]", expr)
+    expr=expr.lstrip()
+    res=re.match('[+-]', expr)
     if res:
         return res.group(0), expr[res.end():]
     else:
         return None, expr
 
 def sum(expr):
-    numb1, rest1 = mul(expr)
+    numb1, rest1=mul(expr)
 
-    if numb1 == None:
+    if numb1==None:
         return None, expr
 
-    op, rest2 = sum_oper(rest1)
+    operator, rest2=sum_oper(rest1)
 
-    if op == None:
+    if operator==None:
         return numb1, rest1
 
-    numb2, rest2 = sum(rest2)
+    numb2, rest2=sum(rest2)
 
-    if op == "+":
-        return numb1 + numb2, rest2
-    if op == "-":
-        return numb1 - numb2, rest2
+    if operator=='+':
+        return numb1+numb2, rest2
+    if operator=='-':
+        return numb1-numb2, rest2
 
     return None, expr
+
 
 def term(expr):
     return sum(expr)
 
-print(term("5+8/2*2"))
+def validation(expr):
+        match = re.search(a, expr)
+        if match:
+            print('validation is ok')
+        else:
+            print('wrong input, restart the programm')
+            exit()
+    
+
+def iiinput():
+    expr=input('input the exprassion==>>')
+    validation(expr)
+    return print((term(expr))[0])
+
+a='[0-9 \.\(\)\-\+\*\/]'
+if __name__=='__main__':
+    iiinput()
+        
